@@ -12,9 +12,6 @@ from dotenv import load_dotenv
 import urllib.parse
 import pandas as pd
 
-# Import correct monitoring client
-# from correct_langsmith_module import LangSmithClient  # Update this line based on documentation
-
 # Load environment variables from .env file
 load_dotenv()
 
@@ -31,7 +28,7 @@ mysql_user = st.sidebar.text_input("MySQL User")
 mysql_password = st.sidebar.text_input("MySQL Password", type="password")
 mysql_db = st.sidebar.text_input("MySQL Database")
 
-# Update API key based on user input
+# Update API key 
 groq_api_key = st.sidebar.text_input(label="Groq API Key", type="password", value=groq_api_key)
 langsmith_key = st.sidebar.text_input(label="LangSmith API Key", type="password", value=langsmith_key)
 
@@ -46,11 +43,6 @@ mysql_password = urllib.parse.quote_plus(mysql_password)
 # LLM model
 llm = ChatGroq(groq_api_key=groq_api_key, model_name="Llama3-8b-8192", streaming=True)
 
-# Initialize LangSmith client (update the client initialization as per documentation)
-# langsmith_client = LangSmithClient(api_key=langsmith_key)
-# Example placeholder if client has different setup
-# langsmith_client = YourLangSmithClient(api_key=langsmith_key)
-
 @st.cache_resource(ttl="2h")
 def configure_db(mysql_host, mysql_port, mysql_user, mysql_password, mysql_db):
     if not (mysql_host and mysql_user and mysql_password and mysql_db):
@@ -61,8 +53,6 @@ def configure_db(mysql_host, mysql_port, mysql_user, mysql_password, mysql_db):
         # Create SQLAlchemy engine for MySQL
         connection_string = f"mysql+mysqlconnector://{mysql_user}:{mysql_password}@{mysql_host}:{mysql_port}/{mysql_db}"
         engine = create_engine(connection_string)
-        
-        # Test connection
         with engine.connect() as conn:
             # Test the connection by executing a simple query
             result = conn.execute(text("SELECT 1"))
@@ -76,8 +66,6 @@ def configure_db(mysql_host, mysql_port, mysql_user, mysql_password, mysql_db):
     except Exception as e:
         st.error(f"Error: {str(e)}")
         st.stop()
-
-# Connect to MySQL database using the details provided by the user
 engine = configure_db(mysql_host, mysql_port, mysql_user, mysql_password, mysql_db)
 
 # Toolkit
@@ -90,7 +78,6 @@ agent = create_sql_agent(
     toolkit=toolkit,
     verbose=True,
     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-    # callbacks=[StreamlitCallbackHandler(st.container()), langsmith_client]  # Add correct client callback
 )
 
 # Sidebar navigation
@@ -100,7 +87,7 @@ nav_option = st.sidebar.radio(
 )
 
 if nav_option == "Chat with Database":
-    # Initialize or clear message history
+    
     if "messages" not in st.session_state or st.sidebar.button("Clear message history"):
         st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
 
