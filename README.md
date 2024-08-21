@@ -43,9 +43,6 @@ This Streamlit application allows users to interact with a MySQL database throug
 
 2. Open the provided URL in your web browser to interact with the application.
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ## Contributing
 Feel free to open issues and submit pull requests to contribute to the project.
 
