@@ -13,7 +13,7 @@ This Streamlit application allows users to interact with a MySQL database throug
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/YourRepo/Chat-MySQL.git
+    git clone path/Chat-MySQL.git
     cd Chat-MySQL
     ```
 
