@@ -46,5 +46,3 @@ This Streamlit application allows users to interact with a MySQL database throug
 ## Contributing
 Feel free to open issues and submit pull requests to contribute to the project.
 
-## Contact
-For any questions or issues, please contact [Your Name](mailto:your.email@example.com).
