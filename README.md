@@ -43,6 +43,3 @@ This Streamlit application allows users to interact with a MySQL database throug
 
 2. Open the provided URL in your web browser to interact with the application.
 
-## Contributing
-Feel free to open issues and submit pull requests to contribute to the project.
-
